@@ -8,6 +8,7 @@ const addUpdate = document.getElementById("AddUpdateClick");
 
 let updateText;
 
+
 if (!todo) {
   todo = [];
 }
