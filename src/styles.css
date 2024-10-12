@@ -79,6 +79,7 @@ body {
     background: #edeef0;
     margin-bottom: 10px;
     border-radius: 5px;
+    user-select: none;
   }
 
   li div {

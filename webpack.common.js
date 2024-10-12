@@ -15,7 +15,7 @@
      filename: 'main.js',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
-     library: 'lib',  
+     //  library: 'lib',  
    },
    module: {
     rules: [
