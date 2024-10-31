@@ -1,5 +1,5 @@
-import { todo, setLocalStorage } from "./storageModule";
-import { todoValue } from "./initialModule";
+import { todo, projects, setLocalProjectStorage, setLocalStorage } from "./storageModule";
+import { projectValue, todoValue } from "./initialModule";
 
 
 function DeleteToDoItems(e) {
@@ -9,6 +9,12 @@ function DeleteToDoItems(e) {
     if (confirm(`Are you sure. Due you want to delete this ${deleteValue}!`)) {
       e.parentElement.parentElement.setAttribute("class", "deleted-item");
       todoValue.focus();
+
+      projects.forEach((element) => {
+        if (element.project == deleteValue.trim()) {
+          projects.splice(element, 1);
+        }
+      });
   
       todo.forEach((element) => {
         if (element.item == deleteValue.trim()) {
@@ -20,6 +26,7 @@ function DeleteToDoItems(e) {
         e.parentElement.parentElement.remove();
       }, 1000);
   
+      setLocalProjectStorage();
       setLocalStorage();
     }
   }

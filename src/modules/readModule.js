@@ -1,8 +1,21 @@
-import { todo } from "./storageModule";
-import { listItems} from "./initialModule";
+import { projects, todo } from "./storageModule";
+import {listProjectItems, listItems} from "./initialModule";
 
 
 export function ReadToDoItems() {
+
+    projects.forEach((element) => {
+      let li = document.createElement("li");
+      const projectItems = 
+      `<div>${element.project}</div>
+        <div id="icon-wrapper">
+          <svg class="edit todo-controls" onclick="updateProjectItems(this)"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil</title><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+          <svg class="delete todo-controls" onclick="DeleteToDoItems(this)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>delete</title><path d="M18,19C18,20.66 16.66,22 15,22H8C6.34,22 5,20.66 5,19V7H4V4H8.5L9.5,3H13.5L14.5,4H19V7H18V19M6,7V19C6,20.1 6.9,21 8,21H15C16.1,21 17,20.1 17,19V7H6M18,6V5H14L13,4H10L9,5H5V6H18M8,9H9V19H8V9M14,9H15V19H14V9Z" /></svg>
+        </div>`;
+      li.innerHTML = projectItems;
+      listProjectItems.appendChild(li);
+    });
+
     todo.forEach((element) => {
       let li = document.createElement("li");
       let style = "";

@@ -1,6 +1,20 @@
-import { todo, setLocalStorage } from "./storageModule";
-import { todoValue, todoDescription, todoDate, todoPriority, addUpdate, updateText } from "./initialModule";
+import { projects, todo, setLocalProjectStorage, setLocalStorage } from "./storageModule";
+import { projectValue, todoValue, todoDescription, todoDate, todoPriority, addProjectUpdate, addUpdate, updateText, todoAlert } from "./initialModule";
 import { setAlertMessage } from "./alertModule";
+import { dialog, open, openModel } from "./dialogModule";
+
+function updateProjectItems(e) {
+  openModel;
+  const div = e.parentElement.parentElement.querySelector("div");
+  projectValue.value = div.innerText;
+
+  updateText = e.parentElement.parentElement.querySelector("div");
+  addProjectUpdate.setAttribute("onclick", "UpdateOnSelectionProjects()");
+  projectValue.focus();
+}
+
+window.updateProjectItems = updateProjectItems;
+export let globalUpdateProjectItems = window.updateProjectItems;
 
 function UpdateToDoItems(e) {
     if (
@@ -16,15 +30,36 @@ function UpdateToDoItems(e) {
 
 
       updateText = e.parentElement.parentElement.querySelectorAll("#values");
-      // updateText = e.parentElement.parentElement.querySelector("div");
       addUpdate.setAttribute("onclick", "UpdateOnSelectionItems()");
       todoValue.focus();
     }
 }
 
 window.UpdateToDoItems = UpdateToDoItems;
-
 export let globalUpdateToDoItems = window.UpdateToDoItems;
+
+function UpdateOnSelectionProjects() {
+  projects.forEach((element) => {
+    if (element.project == updateText.innerText.trim()) {
+      element.project = projectValue.value;
+    }
+  });
+  setLocalProjectStorage();
+
+  if (projectValue.value === "") {
+    todoAlert.innerText = "Please enter your project name!";
+    projectValue.focus();
+  } else {
+    updateText.innerText = projectValue.value;
+    addProjectUpdate.setAttribute("onclick", "createProjectItems();");
+    addProjectUpdate.setAttribute("id", "AddProjectUpdateClick");
+    projectValue.value = "";
+    setAlertMessage("Project Title Updated Successfully!");
+  }
+}
+
+window.UpdateOnSelectionProjects = UpdateOnSelectionProjects;
+export let globalUpdateOnSelectionProjects = window.UpdateOnSelectionProjects;
   
 function UpdateOnSelectionItems() {
   
@@ -58,5 +93,4 @@ function UpdateOnSelectionItems() {
  }
 
  window.UpdateOnSelectionItems = UpdateOnSelectionItems;
-
  export let globalUpdateOnSelectionItems = window.UpdateOnSelectionItems;
